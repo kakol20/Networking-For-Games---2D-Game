@@ -17,8 +17,8 @@ MenuState::MenuState(GameState* state) : GameState(state)
 bool MenuState::OnEnter()
 {
 	m_menu = new MainMenu;
-	m_menu->SetMenuText("PLAY GAME");
-	m_menu->SetMenuText("QUIT GAME");
+	m_menu->SetMenuText("HOST SERVER");
+	m_menu->SetMenuText("QUIT SERVER");
 
 	m_image = new Background("Assets/Textures/Menu.png", "Assets/Audio/Menu.ogg");
 
@@ -34,7 +34,7 @@ bool MenuState::Update()
 {
 	//play the background music associated with the image
 	//when the state transitions to the next state stop it
-	m_image->PlayMusic();
+	//m_image->PlayMusic();
 
 	//update the main menu to determine which menu choice was made
 	m_menu->Update();

@@ -135,6 +135,9 @@
     <ClInclude Include="Network.h">
       <Filter>Header Files\Own Code</Filter>
     </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Header Files\Own Code</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Audio.cpp">
@@ -201,6 +204,9 @@
       <Filter>Source Files\Own Code</Filter>
     </ClCompile>
     <ClCompile Include="Network.cpp">
+      <Filter>Source Files\Own Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
       <Filter>Source Files\Own Code</Filter>
     </ClCompile>
   </ItemGroup>

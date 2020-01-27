@@ -25,8 +25,8 @@ void AABB::SetDimension(int width, int height)
 //------------------------------------------------------------------------------------------------------
 bool AABB::IsColliding(const AABB& secondBox)
 {
-	return ((m_max.x > secondBox.m_min.x && secondBox.m_max.x > m_min.x) &&
-		(m_max.y > secondBox.m_min.y && secondBox.m_max.y > m_min.y));
+	return ((m_max.x > secondBox.m_min.x&& secondBox.m_max.x > m_min.x) &&
+		(m_max.y > secondBox.m_min.y&& secondBox.m_max.y > m_min.y));
 }
 //------------------------------------------------------------------------------------------------------
 //function that calculates min and max values of AABB for collision purposes

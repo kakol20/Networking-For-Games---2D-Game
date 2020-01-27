@@ -14,7 +14,7 @@ PlayState::PlayState(GameState* state) : GameState(state)
 	m_image = nullptr;
 
 	m_network.Init();
-	m_network.ResolveHost();
+	m_network.ResolveHost(128);
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -33,7 +33,9 @@ bool PlayState::Update()
 {
 	//play the background music associated with the image
 	//when the state transitions to the next state stop it
-	m_image->PlayMusic();
+	//m_image->PlayMusic();
+
+	m_network.Start();
 
 	//read keyboard state
 	KeyState keys = TheInput::Instance()->GetKeyStates();
