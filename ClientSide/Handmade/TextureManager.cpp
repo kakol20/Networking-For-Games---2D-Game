@@ -4,29 +4,24 @@
 #include "TextureManager.h"
 
 //------------------------------------------------------------------------------------------------------
-//getter function that returns font pointer based on font map index passed 
+//getter function that returns font pointer based on font map index passed
 //------------------------------------------------------------------------------------------------------
 TTF_Font* TextureManager::GetFont(const std::string& mapIndex)
 {
-
 	return m_fontMap[mapIndex];
-
 }
 //------------------------------------------------------------------------------------------------------
-//getter function that returns texture pointer based on texture map index passed 
+//getter function that returns texture pointer based on texture map index passed
 //------------------------------------------------------------------------------------------------------
 SDL_Texture* TextureManager::GetTexture(const std::string& mapIndex)
 {
-
 	return m_textureMap[mapIndex];
-
 }
 //------------------------------------------------------------------------------------------------------
-//function that initializes SDL font sub-system 
+//function that initializes SDL font sub-system
 //------------------------------------------------------------------------------------------------------
 bool TextureManager::Initialize()
 {
-
 	//if font sub-system initialization failed, display error message and return false
 	if (TTF_Init() == -1)
 	{
@@ -35,15 +30,13 @@ bool TextureManager::Initialize()
 	}
 
 	return true;
-
 }
 //------------------------------------------------------------------------------------------------------
 //function that loads a font from a file in a particular size and stores the data in a font map
 //------------------------------------------------------------------------------------------------------
-bool TextureManager::LoadFontFromFile(const std::string& filename, int fontSize, 
-	                                  const std::string& mapIndex)
+bool TextureManager::LoadFontFromFile(const std::string& filename, int fontSize,
+	const std::string& mapIndex)
 {
-
 	//display text to state that file is being opened and read
 	std::cout << "Opening and reading font file: " << "\"" << filename << "\"" << std::endl;
 
@@ -66,14 +59,12 @@ bool TextureManager::LoadFontFromFile(const std::string& filename, int fontSize,
 	std::cout << "---------------------------------------------------------------" << std::endl;
 
 	return true;
-
 }
 //------------------------------------------------------------------------------------------------------
 //function that loads a texture from a raw image file and stores the ID in a texture map
 //------------------------------------------------------------------------------------------------------
 bool TextureManager::LoadTextureFromFile(const std::string& filename, const std::string& mapIndex)
 {
-
 	SDL_Texture* texture = nullptr;
 	SDL_Surface* textureData = nullptr;
 
@@ -83,7 +74,7 @@ bool TextureManager::LoadTextureFromFile(const std::string& filename, const std:
 	//load texture from file using SDL image load function
 	textureData = IMG_Load(filename.c_str());
 
-	//if texture loading failed, display error message 
+	//if texture loading failed, display error message
 	if (!textureData)
 	{
 		std::cout << "File could not be loaded." << std::endl;
@@ -93,7 +84,6 @@ bool TextureManager::LoadTextureFromFile(const std::string& filename, const std:
 
 	else
 	{
-
 		//create a texture out of the previously loaded image
 		texture = SDL_CreateTextureFromSurface(TheScreen::Instance()->GetRenderer(), textureData);
 
@@ -102,7 +92,6 @@ bool TextureManager::LoadTextureFromFile(const std::string& filename, const std:
 
 		//assign newly created texture object to texture map
 		m_textureMap[mapIndex] = texture;
-
 	}
 
 	//display text to state that file has been opened and read
@@ -110,20 +99,17 @@ bool TextureManager::LoadTextureFromFile(const std::string& filename, const std:
 	std::cout << "---------------------------------------------------------------" << std::endl;
 
 	return true;
-
 }
 //------------------------------------------------------------------------------------------------------
 //function that unloads single or multiple textures from memory
 //------------------------------------------------------------------------------------------------------
-void TextureManager::UnloadFromMemory(DataType dataType, 
-	                                  RemoveType removeType, const std::string& mapIndex)
+void TextureManager::UnloadFromMemory(DataType dataType,
+	RemoveType removeType, const std::string& mapIndex)
 {
-
-	//if a font file needs to be removed, free it from memory based on if a 
+	//if a font file needs to be removed, free it from memory based on if a
 	//single item needs to be removed or if the entire map needs to be cleared
 	if (dataType == FONT_DATA)
 	{
-
 		if (removeType == CUSTOM_DATA)
 		{
 			auto it = m_fontMap.find(mapIndex);
@@ -142,23 +128,19 @@ void TextureManager::UnloadFromMemory(DataType dataType,
 
 		else if (removeType == ALL_DATA)
 		{
-
 			for (auto it = m_fontMap.begin(); it != m_fontMap.end(); it++)
 			{
 				TTF_CloseFont(it->second);
 			}
 
 			m_fontMap.clear();
-
 		}
-
 	}
 
 	//otherwise if a texture file needs to be removed, free it from memory based on
 	//if a single item needs to be removed or if the entire map needs to be cleared
 	else if (dataType == TEXTURE_DATA)
 	{
-
 		if (removeType == CUSTOM_DATA)
 		{
 			auto it = m_textureMap.find(mapIndex);
@@ -177,34 +159,27 @@ void TextureManager::UnloadFromMemory(DataType dataType,
 
 		else if (removeType == ALL_DATA)
 		{
-
 			for (auto it = m_textureMap.begin(); it != m_textureMap.end(); it++)
 			{
 				SDL_DestroyTexture(it->second);
 			}
 
 			m_textureMap.clear();
-
 		}
-
 	}
-
 }
 //------------------------------------------------------------------------------------------------------
 //function that closes down SDL font sub-system
 //------------------------------------------------------------------------------------------------------
 void TextureManager::ShutDown()
 {
-
 	TTF_Quit();
-
 }
 //------------------------------------------------------------------------------------------------------
 //function that displays total size of font and texture maps
 //------------------------------------------------------------------------------------------------------
 void TextureManager::Output()
 {
-
 	system("cls");
 	std::cout << "------------------------------------" << std::endl;
 	std::cout << "Total size of texture and font maps: " << std::endl;
@@ -212,5 +187,4 @@ void TextureManager::Output()
 	std::cout << "Size of Font Map    : " << m_fontMap.size() << std::endl;
 	std::cout << "Size of Texture Map : " << m_textureMap.size() << std::endl;
 	std::cout << "------------------------------------" << std::endl;
-
 }

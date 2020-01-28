@@ -8,8 +8,8 @@
 | All code has been written by Karsten Vermeulen as part of the 'Handmade Lite' game engine,    |
 | for the purposes of educating other fellow programmers, programming students and anyone else  |
 | wishing to learn about game development, C++ and OOP. The structure of the engine, class      |
-| design and overall code is constantly under development.                                      | 
-|                                                                                               |      																						
+| design and overall code is constantly under development.                                      |
+|                                                                                               |
 | Designed to teach. Made from scratch. Built by hand.  						                |
 |																							    |
 #===============================================================================================#
@@ -32,11 +32,10 @@
 
 class Audio
 {
-
 public:
 
 	enum AudioType { MUSIC_AUDIO, VOICE_AUDIO };
-	enum LoopType  { PLAY_ONCE = 1, PLAY_ENDLESS = -1 };
+	enum LoopType { PLAY_ONCE = 1, PLAY_ENDLESS = -1 };
 
 public:
 
@@ -52,12 +51,11 @@ public:
 	bool Play(LoopType loopType = PLAY_ONCE);
 	void Pause();
 	void Resume();
-	void Stop();    			
+	void Stop();
 
 private:
-	
+
 	Mix_Music* m_audio;
-					
 };
 
 #endif

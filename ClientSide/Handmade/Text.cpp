@@ -7,84 +7,69 @@
 //------------------------------------------------------------------------------------------------------
 Text::Text()
 {
-
 	m_font = nullptr;
 	m_texture = nullptr;
 	m_textSize = { 0, 0 };
 	m_color = { 255, 255, 255 };
-
 }
 //------------------------------------------------------------------------------------------------------
 //copy constructor that makes deep copies of object
 //------------------------------------------------------------------------------------------------------
 Text::Text(const Text& copy)
 {
-
 	m_text = copy.m_text;
 	m_font = copy.m_font;
 	m_color = copy.m_color;
 	m_textSize = copy.m_textSize;
 	m_texture = nullptr;
 	CreateText();
-
 }
 //------------------------------------------------------------------------------------------------------
 //getter function that returns size of text object
 //------------------------------------------------------------------------------------------------------
 SDL_Point Text::GetSize()
 {
-
 	return m_textSize;
-
 }
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns size of text object
 //------------------------------------------------------------------------------------------------------
 void Text::SetSize(int width, int height)
 {
-
 	m_textSize.x = width;
 	m_textSize.y = height;
-
 }
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns string text and creates text object
 //------------------------------------------------------------------------------------------------------
 void Text::SetText(const std::string& text)
 {
-
 	m_text = text;
 	CreateText();
-
 }
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns text color and creates text object
 //------------------------------------------------------------------------------------------------------
 void Text::SetColor(Uint8 r, Uint8 g, Uint8 b)
 {
-
 	m_color.r = r;
 	m_color.g = g;
 	m_color.b = b;
 
 	CreateText();
-
 }
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns font style to text object based on index value passed
 //------------------------------------------------------------------------------------------------------
 void Text::SetFont(const std::string& mapIndex)
 {
-
 	m_font = TheTexture::Instance()->GetFont(mapIndex);
-
 }
 //------------------------------------------------------------------------------------------------------
 //function that draws the actual text on screen
 //------------------------------------------------------------------------------------------------------
 void Text::Draw(int xPosition, int yPosition)
 {
-
 	SDL_Rect dst;
 
 	//assign dimension of rectangular block to which text will be rendered to on screen
@@ -95,15 +80,13 @@ void Text::Draw(int xPosition, int yPosition)
 
 	//render the text object using all values passed and determined above
 	SDL_RenderCopy(TheScreen::Instance()->GetRenderer(), m_texture, NULL, &dst);
-
 }
 //------------------------------------------------------------------------------------------------------
 //function that creates the actual text object
 //------------------------------------------------------------------------------------------------------
 void Text::CreateText()
 {
-
-	//create text object using font style, text string and color 
+	//create text object using font style, text string and color
 	//value and store in a temporary pointer to be used below
 	SDL_Surface* textSurface = TTF_RenderText_Blended(m_font, m_text.c_str(), m_color);
 
@@ -114,14 +97,11 @@ void Text::CreateText()
 
 	//remove temporary SDL surface object as we don't need it anymore
 	SDL_FreeSurface(textSurface);
-
 }
 //------------------------------------------------------------------------------------------------------
 //destructor that removes final SDL texture from memory
 //------------------------------------------------------------------------------------------------------
 Text::~Text()
 {
-
 	SDL_DestroyTexture(m_texture);
-
 }

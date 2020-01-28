@@ -37,12 +37,11 @@ typedef const Uint8* KeyState;
 
 class InputManager
 {
-
 public:
 
 	enum ButtonState { UP, DOWN };
 	enum CursorState { ON = 1, OFF = 0, SHOW = 1, HIDE = 0 };
-	enum CursorType  { ARROW, IBEAM, WAIT, CROSSHAIR, WAIT_ARROW, NO = 10, HAND = 11 };
+	enum CursorType { ARROW, IBEAM, WAIT, CROSSHAIR, WAIT_ARROW, NO = 10, HAND = 11 };
 
 public:
 
@@ -62,11 +61,11 @@ public:
 	SDL_Point GetMouseWheel();
 	SDL_Point GetMouseMotion();
 	SDL_Point GetMousePosition();
-	
+
 	ButtonState GetLeftButtonState();
 	ButtonState GetRightButtonState();
 	ButtonState GetMiddleButtonState();
-		
+
 	const std::string& GetInput();
 
 	void SetMousePosition(int x, int y);
@@ -96,11 +95,10 @@ private:
 	SDL_Point m_mouseWheel;
 	SDL_Point m_mouseMotion;
 	SDL_Point m_mousePosition;
-	
+
 	ButtonState m_leftButtonState;
 	ButtonState m_rightButtonState;
 	ButtonState m_middleButtonState;
-	
 };
 
 typedef Singleton<InputManager> TheInput;

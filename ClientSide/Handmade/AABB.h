@@ -31,7 +31,6 @@
 
 class AABB
 {
-
 public:
 
 	void SetPosition(int x, int y);
@@ -51,7 +50,6 @@ private:
 	SDL_Point m_max;
 	SDL_Point m_position;
 	SDL_Point m_dimension;
-	
 };
 
 #endif

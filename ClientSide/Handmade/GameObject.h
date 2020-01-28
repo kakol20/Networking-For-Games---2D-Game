@@ -30,14 +30,13 @@
 #include <string>
 #include <SDL.h>
 
-class GameObject 
+class GameObject
 {
-
 public:
 
 	GameObject();
 	virtual ~GameObject() = 0 {}
-	
+
 public:
 
 	bool& IsAlive();
@@ -65,7 +64,6 @@ protected:
 
 	std::string m_tag;
 	SDL_Point m_position;
-
 };
 
 #endif

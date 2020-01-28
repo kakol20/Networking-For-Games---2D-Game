@@ -154,6 +154,7 @@
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="TagGame.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="TextureManager.h" />
   </ItemGroup>
@@ -177,6 +178,7 @@
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="String.cpp" />
+    <ClCompile Include="TagGame.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>

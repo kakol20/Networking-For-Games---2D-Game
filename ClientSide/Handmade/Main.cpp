@@ -24,18 +24,17 @@
 | 'Main' source file last updated in July 2019 									                |
 #==============================================================================================*/
 
-//include SDL main header file to prevent 
+//include SDL main header file to prevent
 //main lib conflicts in Release mode
-#include <SDL.h> 
+#include <SDL.h>
 #include "Game.h"
 #include "MenuState.h"
 
 //------------------------------------------------------------------------------------------------------
-//main function that processes everything  
+//main function that processes everything
 //------------------------------------------------------------------------------------------------------
 int main(int argc, char* args[])
 {
-
 	//initialize the game
 	if (!(TheGame::Instance()->Initialize("Adrian's Game", 1280, 720)))
 	{
@@ -56,5 +55,4 @@ int main(int argc, char* args[])
 
 	//end application
 	return 0;
-
 }

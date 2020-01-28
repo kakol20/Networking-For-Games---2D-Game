@@ -31,7 +31,6 @@
 
 class Sphere
 {
-
 public:
 
 	Sphere();
@@ -49,7 +48,6 @@ private:
 
 	int m_radius;
 	SDL_Point m_position;
-
 };
 
 #endif

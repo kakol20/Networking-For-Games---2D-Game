@@ -7,77 +7,64 @@
 //------------------------------------------------------------------------------------------------------
 Sprite::Sprite()
 {
-
 	m_textureIndex = 0;
 	m_texture = nullptr;
 
 	m_textureCel = { 0, 0 };
 	m_spriteDimension = { 0, 0 };
 	m_textureDimension = { 0, 0, 0, 0 };
-
 }
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns specific position of image cell in texture
 //------------------------------------------------------------------------------------------------------
 void Sprite::SetTextureCel(int column, int row)
 {
-
 	m_textureCel.x = column;
 	m_textureCel.y = row;
-
 }
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns texture image to sprite based on index value passed
 //------------------------------------------------------------------------------------------------------
 void Sprite::SetTexture(const std::string& mapIndex)
 {
-
 	m_texture = TheTexture::Instance()->GetTexture(mapIndex);
-
 }
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns size of sprite
 //------------------------------------------------------------------------------------------------------
 void Sprite::SetSpriteDimension(int width, int height)
 {
-
 	m_spriteDimension.x = width;
 	m_spriteDimension.y = height;
-
 }
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns dimension size of texture and pixel size of each cel
 //------------------------------------------------------------------------------------------------------
 void Sprite::SetTextureDimension(int column, int row, int width, int height)
 {
-
 	m_textureDimension.x = column;
 	m_textureDimension.y = row;
 	m_textureDimension.w = width;
 	m_textureDimension.h = height;
-
 }
 //------------------------------------------------------------------------------------------------------
 //function that creates and draws the actual sprite on screen
 //------------------------------------------------------------------------------------------------------
 void Sprite::Draw(int xPosition, int yPosition, double angle, FlipType flipType)
 {
-
-	//aquire index value of specific texture cel to 'cut out' using a basic formula 
+	//aquire index value of specific texture cel to 'cut out' using a basic formula
 	m_textureIndex = (m_textureCel.y * m_textureDimension.x) + m_textureCel.x;
 
 	//use internal blitting function to draw the sprite on screen
 	BlitSprite(xPosition, yPosition, angle, flipType);
-
 }
 //------------------------------------------------------------------------------------------------------
 //function that calculates the source and destination sections of the sprite and screen and renders
 //------------------------------------------------------------------------------------------------------
 void Sprite::BlitSprite(int xPosition, int yPosition, double angle, FlipType flipType)
 {
-
-	//variables to store rectangular dimensions for the source 
-	//sprite and destination portion of the screen to render to 
+	//variables to store rectangular dimensions for the source
+	//sprite and destination portion of the screen to render to
 	SDL_Rect src;
 	SDL_Rect dst;
 
@@ -100,7 +87,6 @@ void Sprite::BlitSprite(int xPosition, int yPosition, double angle, FlipType fli
 	centrePoint.y = m_spriteDimension.y / 2;
 
 	//render the sprite using all values passed and determined above
-	SDL_RenderCopyEx(TheScreen::Instance()->GetRenderer(), 
-		             m_texture, &src, &dst, angle, &centrePoint, (SDL_RendererFlip)flipType);
-
+	SDL_RenderCopyEx(TheScreen::Instance()->GetRenderer(),
+		m_texture, &src, &dst, angle, &centrePoint, (SDL_RendererFlip)flipType);
 }

@@ -33,7 +33,6 @@
 
 class MainMenu : public GameObject
 {
-
 public:
 
 	MainMenu();
@@ -58,7 +57,6 @@ private:
 	int m_menuOptionChoice;
 	int m_menuOptionActive;
 	std::vector<Text> m_menuText;
-
 };
 
 #endif

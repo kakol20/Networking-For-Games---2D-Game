@@ -33,7 +33,6 @@
 
 class ScreenManager
 {
-
 public:
 
 	friend class Singleton<ScreenManager>;
@@ -47,12 +46,12 @@ public:
 public:
 
 	void SetClearColor(Uint8 r, Uint8 g, Uint8 b);
-	
+
 public:
 
 	bool Initialize(const std::string& windowTitle, int width = 1024,
-		            int height = 768, bool fullscreen = false);
-	
+		int height = 768, bool fullscreen = false);
+
 	void Update();
 	void Draw();
 
@@ -71,7 +70,6 @@ private:
 
 	SDL_Window* m_window;
 	SDL_Renderer* m_renderer;
-	
 };
 
 typedef Singleton<ScreenManager> TheScreen;

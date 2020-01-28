@@ -33,7 +33,6 @@
 
 class EndState : public GameState
 {
-
 public:
 
 	enum MenuOption { PLAY, QUIT };
@@ -54,7 +53,6 @@ private:
 
 	MainMenu* m_menu;
 	Background* m_image;
-	
 };
 
 #endif

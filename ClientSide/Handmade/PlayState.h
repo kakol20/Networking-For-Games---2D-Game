@@ -32,9 +32,10 @@
 #include "GameObject.h"
 #include "GameState.h"
 
+#include "TagGame.h"
+
 class PlayState : public GameState
 {
-
 public:
 
 	PlayState(GameState* state);
@@ -50,7 +51,8 @@ public:
 private:
 
 	Background* m_image;
-	
+
+	TagGame m_mainGame;
 };
 
 #endif

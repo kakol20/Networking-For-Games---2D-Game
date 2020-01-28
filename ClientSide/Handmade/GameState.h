@@ -29,9 +29,8 @@
 
 class GameState
 {
-
 public:
-	
+
 	GameState(GameState* state);
 	virtual ~GameState() = 0 {}
 
@@ -52,7 +51,6 @@ protected:
 	bool m_isAlive;
 	bool m_isActive;
 	GameState* m_previousState;
-
 };
 
 #endif

@@ -33,7 +33,6 @@
 
 class Background : public GameObject
 {
-
 public:
 
 	Background(const std::string& imageFilename, const std::string& audioFilename);
@@ -57,7 +56,6 @@ protected:
 
 	Audio m_music;
 	Sprite m_image;
-
 };
 
 #endif

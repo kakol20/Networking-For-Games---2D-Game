@@ -2,60 +2,49 @@
 #include "ScreenManager.h"
 
 //------------------------------------------------------------------------------------------------------
-//constructor that assigns all default values 
+//constructor that assigns all default values
 //------------------------------------------------------------------------------------------------------
 ScreenManager::ScreenManager()
 {
-
 	m_width = 0;
 	m_height = 0;
 
 	m_window = nullptr;
 	m_renderer = nullptr;
-
 }
 //------------------------------------------------------------------------------------------------------
 //getter function that returns SDL game window
 //------------------------------------------------------------------------------------------------------
 SDL_Window* ScreenManager::GetWindow()
 {
-
 	return m_window;
-
 }
 //------------------------------------------------------------------------------------------------------
 //getter function that returns SDL renderer
 //------------------------------------------------------------------------------------------------------
 SDL_Renderer* ScreenManager::GetRenderer()
 {
-
 	return m_renderer;
-
 }
 //------------------------------------------------------------------------------------------------------
 //getter function that creates screen size vector and returns it
 //------------------------------------------------------------------------------------------------------
 SDL_Point ScreenManager::GetScreenSize()
 {
-
 	return { m_width, m_height };
-
 }
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns a pre-defined color value for clearing the screen
 //------------------------------------------------------------------------------------------------------
 void ScreenManager::SetClearColor(Uint8 r, Uint8 g, Uint8 b)
 {
-
 	SDL_SetRenderDrawColor(m_renderer, r, g, b, 255);
-
 }
 //------------------------------------------------------------------------------------------------------
-//function that initializes the screen including the SDL subsystems   
+//function that initializes the screen including the SDL subsystems
 //------------------------------------------------------------------------------------------------------
 bool ScreenManager::Initialize(const std::string& windowTitle, int width, int height, bool fullscreen)
 {
-
 	//initialize SDL subsystem by enabling the entire SDL package
 	//if SDL initialization fails, display error message and return false
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
@@ -68,10 +57,10 @@ bool ScreenManager::Initialize(const std::string& windowTitle, int width, int he
 	Uint32 screenFlag = (fullscreen) ? SDL_WINDOW_FULLSCREEN : 0;
 
 	//create a game window using caption, width, height and screen mode flag
-	m_window = SDL_CreateWindow(windowTitle.c_str(), 
-		                        SDL_WINDOWPOS_CENTERED, 
-		                        SDL_WINDOWPOS_CENTERED,
-		                        width, height, screenFlag);
+	m_window = SDL_CreateWindow(windowTitle.c_str(),
+		SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED,
+		width, height, screenFlag);
 
 	//if game window could not be created, display error message and return false
 	if (!m_window)
@@ -83,9 +72,9 @@ bool ScreenManager::Initialize(const std::string& windowTitle, int width, int he
 	//create SDL renderer using SDL window created earlier
 	//we use -1 to use the first capable graphics driver and
 	//set the rendering to use the GPU and enable vertical syncing
-	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | 
-		                                          SDL_RENDERER_PRESENTVSYNC);
-	
+	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED |
+		SDL_RENDERER_PRESENTVSYNC);
+
 	//if SDL renderer could not be created, display error message and return false
 	if (!m_renderer)
 	{
@@ -99,32 +88,26 @@ bool ScreenManager::Initialize(const std::string& windowTitle, int width, int he
 	m_height = height;
 
 	return true;
-
 }
 //------------------------------------------------------------------------------------------------------
 //function that clears the rendering canvas
 //------------------------------------------------------------------------------------------------------
 void ScreenManager::Update()
 {
-
 	SDL_RenderClear(m_renderer);
-
 }
 //------------------------------------------------------------------------------------------------------
 //function that displays the rendering canvas
 //------------------------------------------------------------------------------------------------------
 void ScreenManager::Draw()
 {
-
 	SDL_RenderPresent(m_renderer);
-
 }
 //------------------------------------------------------------------------------------------------------
 //function that closes down SDL and destroys the game window
 //------------------------------------------------------------------------------------------------------
 void ScreenManager::ShutDown()
 {
-
 	//free SDL renderer
 	SDL_DestroyRenderer(m_renderer);
 
@@ -133,5 +116,4 @@ void ScreenManager::ShutDown()
 
 	//shut down all SDL sub-systems
 	SDL_Quit();
-
 }

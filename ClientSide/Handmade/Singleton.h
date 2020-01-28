@@ -30,17 +30,15 @@
 template <class T>
 class Singleton
 {
-
 public:
 
-	static T* Instance();	
+	static T* Instance();
 
 private:
 
 	Singleton() {}
 	Singleton(const Singleton&);
 	Singleton& operator=(const Singleton&);
-
 };
 
 //------------------------------------------------------------------------------------------------------
@@ -48,7 +46,6 @@ private:
 //------------------------------------------------------------------------------------------------------
 template <class T> T* Singleton<T>::Instance()
 {
-
 	//declare a pointer to the object and assign it a NULL value
 	//this will happen only once, ie the first iteration of this function
 	static T* s_singletonObject = nullptr;
@@ -61,7 +58,6 @@ template <class T> T* Singleton<T>::Instance()
 
 	//alternatively just return the address
 	return s_singletonObject;
-
 }
 
 #endif

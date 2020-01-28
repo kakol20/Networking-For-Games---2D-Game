@@ -32,7 +32,6 @@
 
 class SFX
 {
-
 public:
 
 	SFX();
@@ -44,12 +43,11 @@ public:
 
 public:
 
-	bool Play(int loop = 0);			
-	
+	bool Play(int loop = 0);
+
 private:
-	
+
 	Mix_Chunk* m_sfx;
-					
 };
 
 #endif	

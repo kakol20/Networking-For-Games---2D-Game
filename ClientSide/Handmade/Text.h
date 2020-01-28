@@ -33,7 +33,6 @@
 
 class Text
 {
-
 public:
 
 	Text();
@@ -67,7 +66,6 @@ private:
 	TTF_Font* m_font;
 	SDL_Color m_color;
 	SDL_Texture* m_texture;
-
 };
 
 #endif

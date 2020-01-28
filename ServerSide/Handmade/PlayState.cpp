@@ -23,6 +23,12 @@ PlayState::PlayState(GameState* state) : GameState(state)
 bool PlayState::OnEnter()
 {
 	m_image = new Background("Assets/Textures/Play.png", "Assets/Audio/Play.ogg");
+
+	m_network.Start();
+
+	std::thread t1 = std::thread(&Network::Run, &m_network);
+	t1.detach();
+
 	return true;
 }
 
@@ -34,8 +40,6 @@ bool PlayState::Update()
 	//play the background music associated with the image
 	//when the state transitions to the next state stop it
 	//m_image->PlayMusic();
-
-	m_network.Start();
 
 	//read keyboard state
 	KeyState keys = TheInput::Instance()->GetKeyStates();

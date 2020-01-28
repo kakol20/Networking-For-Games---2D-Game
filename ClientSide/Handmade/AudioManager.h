@@ -34,12 +34,11 @@
 
 class AudioManager
 {
-
 public:
 
 	enum RemoveType { CUSTOM_AUDIO, ALL_AUDIO };
-	enum AudioType  { SFX_AUDIO, MUSIC_AUDIO, VOICE_AUDIO };
-	
+	enum AudioType { SFX_AUDIO, MUSIC_AUDIO, VOICE_AUDIO };
+
 public:
 
 	friend class Singleton<AudioManager>;
@@ -72,7 +71,6 @@ private:
 	std::map<std::string, Mix_Chunk*> m_sfxDataMap;
 	std::map<std::string, Mix_Music*> m_musicDataMap;
 	std::map<std::string, Mix_Music*> m_voiceDataMap;
-
 };
 
 typedef Singleton<AudioManager> TheAudio;

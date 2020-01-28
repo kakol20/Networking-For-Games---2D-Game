@@ -60,7 +60,7 @@ bool Network::Start()
 	//return false;
 }
 
-bool Network::Run()
+void Network::Run()
 {
 	while (!m_exit)
 	{
@@ -68,7 +68,7 @@ bool Network::Run()
 
 		for (auto it = m_clients.begin(); it != m_clients.end(); it++)
 		{
-			if (!it->second->InThread() && it->second->ClientConnected()) // check if the client's update chat is already in a thread and it's connected
+			if (!it->second->InThread() && it->second->ClientConnected()) // check if the client's UpdateGame is already in a thread and it's connected
 			{
 				std::thread t1 = std::thread(&Network::UpdateGame, this, it->first);
 				t1.detach();
@@ -97,7 +97,7 @@ bool Network::Run()
 
 	Shutdown();
 
-	return true;
+	//return true;
 }
 
 void Network::Shutdown()
@@ -128,7 +128,7 @@ void Network::UpdateGame(const int clientID)
 				{
 					if (it->second->ClientConnected())
 					{
-						gameInfo += it->second->GetInfo() + "/";
+						gameInfo += it->second->GetInfo() + "-";
 					}
 				}
 			}

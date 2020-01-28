@@ -34,7 +34,6 @@
 
 class Game
 {
-
 public:
 
 	friend class Singleton<Game>;
@@ -43,11 +42,11 @@ public:
 
 	int GetTotalTime();
 	int GetElapsedTime();
-	
+
 public:
 
 	bool Initialize(const std::string& name, int screenWidth,
-		            int screenHeight, bool fullscreen = false);
+		int screenHeight, bool fullscreen = false);
 
 	void AddState(GameState* state);
 	void ChangeState(GameState* state);
@@ -60,9 +59,9 @@ private:
 	Game();
 	Game(const Game&);
 	Game& operator=(const Game&);
-	
+
 private:
-	
+
 	void RemoveState();
 
 private:
@@ -70,7 +69,6 @@ private:
 	bool m_endGame;
 	int m_elapsedTime;
 	std::deque<GameState*> m_gameStates;
-
 };
 
 typedef Singleton<Game> TheGame;

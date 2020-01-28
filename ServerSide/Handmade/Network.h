@@ -23,7 +23,7 @@ public:
 	bool ResolveHost(int port);
 
 	bool Start();
-	bool Run();
+	void Run();
 	void Shutdown();
 
 	void UpdateGame(const int clientID);

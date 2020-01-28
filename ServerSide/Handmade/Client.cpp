@@ -105,7 +105,7 @@ String Client::GetInfo() const
 void Client::UpdateInfo()
 {
 	// string syntax
-	// x-pos$y-pos$rotation$is-tagged
+	// x-pos$y-pos$score
 
 	String recieved;
 
