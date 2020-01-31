@@ -5,6 +5,7 @@
 #include "InputManager.h"
 #include "MenuState.h"
 #include "PlayState.h"
+#include "TextureManager.h"
 
 //------------------------------------------------------------------------------------------------------
 //constructor that assigns all defaults
@@ -20,6 +21,8 @@ bool PlayState::OnEnter()
 {
 	m_image = new Background("Assets/Textures/Play.png", "Assets/Audio/Play.ogg");
 
+	
+
 	m_mainGame.Init();
 	return true;
 }
@@ -31,8 +34,6 @@ bool PlayState::Update()
 	//play the background music associated with the image
 	//when the state transitions to the next state stop it
 	//m_image->PlayMusic();
-
-
 
 	m_mainGame.Update();
 

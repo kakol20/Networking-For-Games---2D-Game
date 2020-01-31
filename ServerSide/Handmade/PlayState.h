@@ -57,6 +57,7 @@ private:
 	Background* m_image;
 
 	// OWN CODE
+	Text m_clientCount;
 
 private:
 

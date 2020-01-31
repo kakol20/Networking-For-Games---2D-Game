@@ -6,10 +6,13 @@
 #include <SDL_net.h>
 #include <sstream>
 #include <thread>
+#include <vector>
+#include <mutex>
 
 #include "Sprite.h"
 #include "String.h"
 #include "Text.h"
+#include "Player.h"
 
 class TagGame
 {
@@ -28,11 +31,19 @@ private:
 	bool OpenSocket();
 	bool ResolveHost();
 
+	void ReceiveInfo();
+	void SendInfo();
+
 private:
 	IPaddress m_IP;
 	TCPsocket m_socket = nullptr;
 
 	bool m_exit;
+
+	Player m_player;
+
+	std::vector<String> m_enemyInfo;
+	std::mutex m_mutex;
 };
 
 #endif // !TAGGAME_H

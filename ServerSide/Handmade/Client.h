@@ -23,6 +23,7 @@ public:
 	void ReceiveText(String& message);
 	void SendText(const String& message);
 	void SetInThread(const bool flag);
+	void SetConnected(const bool flag);
 
 	// Game Related Functions
 	String GetInfo() const;

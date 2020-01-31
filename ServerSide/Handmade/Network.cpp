@@ -1,11 +1,14 @@
 #include "Network.h"
+//#include "InputManager.h"
 
 Network::Network()
 {
+	Init();
 }
 
 Network::~Network()
 {
+	Shutdown();
 }
 
 bool Network::Init()
@@ -14,7 +17,7 @@ bool Network::Init()
 	{
 		std::cout << "Error initializing SDL\n";
 
-		system("pause");
+		//system("pause");
 
 		return false;
 	}
@@ -23,7 +26,7 @@ bool Network::Init()
 	{
 		std::cout << "Error initializing SDL Net\n";
 
-		system("pause");
+		//system("pause");
 
 		return false;
 	}
@@ -37,10 +40,12 @@ bool Network::ResolveHost(int port)
 	{
 		std::cout << "Error creating server IP" << std::endl;
 
-		system("pause");
+		//system("pause");
 
 		return false;
 	}
+
+	m_listenSocket = SDLNet_TCP_Open(&m_IP);
 
 	return true;
 }
@@ -62,6 +67,8 @@ bool Network::Start()
 
 void Network::Run()
 {
+	Start();
+
 	while (!m_exit)
 	{
 		// Sending and receiving
@@ -92,10 +99,10 @@ void Network::Run()
 			m_clients[(*it)] = nullptr;
 
 			m_clients.erase((*it));
+
+			m_clientsConnected--;
 		}
 	}
-
-	Shutdown();
 
 	//return true;
 }
@@ -110,16 +117,16 @@ void Network::Shutdown()
 
 void Network::UpdateGame(const int clientID)
 {
-	while (!m_clients[clientID]->IsDisconnecting()) // does not run code if client is disconnecting or has already disconnected
+	while (!m_clients[clientID]->IsDisconnecting() && !m_exit) // does not run code if client is disconnecting or has already disconnected
 	{
 		// recieves info
-		m_clients[clientID]->UpdateInfo();
+		if (!m_exit) m_clients[clientID]->UpdateInfo();
 
-		if (!m_clients[clientID]->IsDisconnecting()) // checks if client is not disconnecting
+		if (!m_clients[clientID]->IsDisconnecting() && !m_exit) // checks if client is not disconnecting
 		{
 			// sends info about other clients to current client
-			// info separator per other player: -
-			String gameInfo;
+			// info separator per other player: /
+			String gameInfo = "";
 
 			std::lock_guard<std::mutex> lock(m_mutex);
 			for (auto it = m_clients.begin(); it != m_clients.end(); it++)
@@ -128,12 +135,17 @@ void Network::UpdateGame(const int clientID)
 				{
 					if (it->second->ClientConnected())
 					{
-						gameInfo += it->second->GetInfo() + "-";
+						gameInfo += it->second->GetInfo() + "/";
 					}
 				}
 			}
 
 			// sends info to current client
+
+			if (gameInfo == "")
+			{
+				gameInfo = "none";
+			}
 
 			m_clients[clientID]->SendText(gameInfo);
 		}
@@ -150,17 +162,32 @@ void Network::WaitForClients()
 	{
 		if (m_clients[m_clientIDCount] != nullptr)
 		{
-			while (m_clients[m_clientIDCount] != nullptr && m_clients[m_clientIDCount]->GetSocket() == nullptr)
+			std::cout << "Waiting for client\n";
+			while (m_clients[m_clientIDCount] != nullptr && m_clients[m_clientIDCount]->GetSocket() == nullptr) // wait for new client connection
 			{
 				m_clients[m_clientIDCount]->ListenForClient(m_listenSocket);
 			}
 
+			m_clients[m_clientIDCount]->SetConnected(true);
+			std::cout << "Client Connected\n";
+
 			if (!m_exit)
 			{
 				m_clientIDCount++;
+				m_clientsConnected++;
 
-				m_clients[m_clientIDCount] = new Client(m_clientIDCount);
+				m_clients[m_clientIDCount] = new Client(m_clientIDCount); // add new waiting client
 			}
 		}
 	}
+}
+
+void Network::SetExit(bool flag)
+{
+	m_exit = flag;
+}
+
+int Network::GetClientCount()
+{
+	return m_clientsConnected;
 }

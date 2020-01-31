@@ -36,7 +36,7 @@
 int main(int argc, char* args[])
 {
 	//initialize the game
-	if (!(TheGame::Instance()->Initialize("Adrian's Game", 1280, 720)))
+	if (!(TheGame::Instance()->Initialize("Multiplayer Tag", 1280, 720)))
 	{
 		return 0;
 	}

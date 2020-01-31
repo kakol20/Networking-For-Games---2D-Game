@@ -8,7 +8,7 @@ Client::Client(int id)
 	m_isConnected = false;
 	m_isInThread = false;
 	m_received = false;
-	m_socket = nullptr;
+	m_socket = 0;
 }
 
 Client::~Client()
@@ -43,10 +43,10 @@ void Client::CloseSocket()
 
 void Client::ListenForClient(const TCPsocket& listenSocket)
 {
+	//std::cout << "Listening for client\n";
 	if (listenSocket != nullptr)
 	{
 		m_socket = SDLNet_TCP_Accept(listenSocket);
-		m_isConnected = true;
 	}
 }
 
@@ -59,7 +59,7 @@ void Client::ReceiveText(String& message)
 	if (SDLNet_TCP_Recv(m_socket, response, 2048) <= 0)
 	{
 		std::cout << "Error recieving message" << std::endl;
-		system("pause");
+		//system("pause");
 	}
 	else
 	{
@@ -97,6 +97,11 @@ void Client::SetInThread(const bool flag)
 	m_isInThread = flag;
 }
 
+void Client::SetConnected(const bool flag)
+{
+	m_isConnected = flag;
+}
+
 String Client::GetInfo() const
 {
 	return m_info;
@@ -105,9 +110,7 @@ String Client::GetInfo() const
 void Client::UpdateInfo()
 {
 	// string syntax
-	// x-pos$y-pos$score
-
-	String recieved;
+	// x-pos$y-pos$score$isTagged
 
 	ReceiveText(m_info);
 }

@@ -36,7 +36,7 @@
 int main(int argc, char* args[])
 {
 	//initialize the game
-	if (!(TheGame::Instance()->Initialize("Multi-Player Tag", 1280, 720)))
+	if (!(TheGame::Instance()->Initialize("Multi-Player Tag Server", 1280, 720)))
 	{
 		return 0;
 	}

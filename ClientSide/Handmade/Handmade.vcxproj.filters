@@ -135,6 +135,9 @@
     <ClInclude Include="TagGame.h">
       <Filter>Header Files\Own Code</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Own Code</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Audio.cpp">
@@ -201,6 +204,9 @@
       <Filter>Source Files\Own Code</Filter>
     </ClCompile>
     <ClCompile Include="TagGame.cpp">
+      <Filter>Source Files\Own Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
       <Filter>Source Files\Own Code</Filter>
     </ClCompile>
   </ItemGroup>

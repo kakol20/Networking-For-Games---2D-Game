@@ -147,6 +147,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="SFX.h" />
@@ -172,6 +173,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="SFX.cpp" />

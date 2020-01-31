@@ -29,15 +29,19 @@ public:
 	void UpdateGame(const int clientID);
 	void WaitForClients();
 
+	void SetExit(bool flag);
+	int GetClientCount();
+
 private:
 
 	IPaddress m_IP;
-	TCPsocket m_listenSocket;
+	TCPsocket m_listenSocket = nullptr;
 
 	bool m_exit = false;
 	int m_clientIDCount = 0;
 	std::map<int, Client*> m_clients;
 	std::mutex m_mutex;
+	int m_clientsConnected = 0;
 };
 
 #endif // !NETWORK_H
