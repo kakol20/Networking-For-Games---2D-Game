@@ -59,6 +59,7 @@ void Client::ReceiveText(String& message)
 	if (SDLNet_TCP_Recv(m_socket, response, 2048) <= 0)
 	{
 		std::cout << "Error recieving message" << std::endl;
+		m_disconnecting = true;
 		//system("pause");
 	}
 	else
@@ -84,10 +85,10 @@ void Client::SendText(const String& message)
 	{
 		if (!m_disconnecting)
 		{
-			std::cout << "Error sending message to cliend ID: ";
-			std::cout << m_id;
-			std::cout << std::endl;
-			system("pause");
+			std::cout << "Error sending message to client ID: ";
+			std::cout << m_id << std::endl;
+			m_disconnecting = true;
+			//system("pause");
 		}
 	}
 }

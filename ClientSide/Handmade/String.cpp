@@ -67,7 +67,7 @@ String& String::operator=(const char* string)
 	return *this;
 }
 
-const char* String::GetString() const
+char* String::GetString() const
 {
 	return m_string;
 }

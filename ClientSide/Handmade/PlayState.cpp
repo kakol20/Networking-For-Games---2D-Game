@@ -21,8 +21,6 @@ bool PlayState::OnEnter()
 {
 	m_image = new Background("Assets/Textures/Play.png", "Assets/Audio/Play.ogg");
 
-	
-
 	m_mainGame.Init();
 	return true;
 }

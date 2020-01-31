@@ -54,6 +54,57 @@ void TagGame::Update()
 	{
 		t2.join();
 	}
+
+	for (auto it = m_enemyInfo.begin(); it != m_enemyInfo.end(); it++)
+	{
+		Sphere playerSphere;
+		Sphere enemy;
+
+		playerSphere.SetRadius(15);
+		enemy.SetRadius(15);
+
+		playerSphere.SetPosition(m_player.GetPosition().x, m_player.GetPosition().y);
+
+		// x-pos$y-pos$score$isTagged
+
+		char sep[] = "$";
+
+		char* x;
+		char* y;
+		char* score;
+		char* tagged;
+		char* next;
+
+		int xInt;
+		int yInt;
+
+		char* infoConst = (*it).GetString();
+
+		x = strtok_s(infoConst, sep, &next);
+		y = strtok_s(NULL, sep, &next);
+		score = strtok_s(NULL, sep, &next);
+		tagged = strtok_s(NULL, sep, &next);
+
+		std::stringstream xStr;
+		xStr << x;
+		xStr >> xInt;
+
+		std::stringstream yStr;
+		yStr << y;
+		yStr >> yInt;
+
+		String taggedStr = tagged;
+
+		if (taggedStr == "true")
+		{
+			enemy.SetPosition(xInt, yInt);
+
+			if (playerSphere.IsColliding(enemy))
+			{
+				m_player.SetTagged(false);
+			}
+		}
+	}
 }
 
 void TagGame::Draw()
@@ -118,7 +169,6 @@ void TagGame::ReceiveInfo()
 		{
 			String messageStr = response;
 
-
 			// info separator per other player: /
 
 			if (messageStr != "none")
@@ -151,7 +201,6 @@ void TagGame::ReceiveInfo()
 					}
 
 					nextStr = next;
-
 				};
 			}
 			else

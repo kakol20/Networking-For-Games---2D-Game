@@ -16,7 +16,6 @@ public:
 
 	bool IsTagged();
 	void SetTagged(bool flag);
-	
 
 private:
 

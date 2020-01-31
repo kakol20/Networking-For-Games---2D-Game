@@ -13,6 +13,7 @@
 #include "String.h"
 #include "Text.h"
 #include "Player.h"
+#include "Sphere.h"
 
 class TagGame
 {

@@ -14,7 +14,7 @@ public:
 	String& operator=(const String& copyString);
 	String& operator=(const char* string);
 
-	const char* GetString() const;
+	char* GetString() const;
 
 	String operator+(const String& copyString);
 	String operator+(const char* string);
