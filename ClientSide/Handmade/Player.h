@@ -3,7 +3,9 @@
 
 #include "GameObject.h"
 #include "Sprite.h"
+#include "String.h"
 #include "Text.h"
+
 
 class Player : public GameObject
 {
@@ -14,13 +16,17 @@ public:
 	virtual void Update();
 	virtual bool Draw();
 
-	bool IsTagged();
-	void SetTagged(bool flag);
+	bool IsTagged() const;
+	void SetTagged(const bool flag);
+
+	int GetScore() const;
 
 private:
 
 	bool m_tagged;
+	float m_score;
 	Sprite m_sprite;
+	Text m_scoreT;
 	Text m_taggedT;
 };
 

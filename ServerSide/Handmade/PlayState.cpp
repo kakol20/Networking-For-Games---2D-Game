@@ -53,6 +53,9 @@ bool PlayState::Update()
 	//the M key moves to the main menu
 	if (keys[SDL_SCANCODE_M])
 	{
+		m_network.SetExit(true);
+
+
 		m_image->StopMusic();
 		m_isActive = m_isAlive = false;
 		TheGame::Instance()->ChangeState(new MenuState(this));

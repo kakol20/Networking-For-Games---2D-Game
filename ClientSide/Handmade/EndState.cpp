@@ -30,7 +30,7 @@ bool EndState::Update()
 {
 	//play the background music associated with the image
 	//when the state transitions to the next state stop it
-	m_image->PlayMusic();
+	//m_image->PlayMusic();d
 
 	//update the main menu to determine which menu choice was made
 	m_menu->Update();

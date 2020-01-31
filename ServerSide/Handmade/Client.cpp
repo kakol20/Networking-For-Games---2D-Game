@@ -64,6 +64,8 @@ void Client::ReceiveText(String& message)
 	}
 	else
 	{
+		std::cout << response << std::endl;
+
 		message = response;
 		m_received = true;
 

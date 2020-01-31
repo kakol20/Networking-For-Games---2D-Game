@@ -1,5 +1,6 @@
 #include "Network.h"
 //#include "InputManager.h"
+#include <sstream>
 
 Network::Network()
 {
@@ -112,37 +113,49 @@ void Network::Shutdown()
 	SDLNet_TCP_Close(m_listenSocket);
 
 	SDLNet_Quit();
-	SDL_Quit();
 }
 
 void Network::UpdateGame(const int clientID)
 {
 	while (!m_clients[clientID]->IsDisconnecting() && !m_exit) // does not run code if client is disconnecting or has already disconnected
 	{
+		std::lock_guard<std::mutex> lock(m_mutex);
+
 		// recieves info
 		if (!m_exit) m_clients[clientID]->UpdateInfo();
 
 		if (!m_clients[clientID]->IsDisconnecting() && !m_exit) // checks if client is not disconnecting
 		{
 			// sends info about other clients to current client
+			// enemy count/player1/player2....
 			// info separator per other player: /
-			String gameInfo = "";
 
-			std::lock_guard<std::mutex> lock(m_mutex);
+			// Tell client the number of enemies
+			int enemyCount = m_clientsConnected - 1;
+			char eStr[255] = { '\0' };
+
+			std::stringstream eCount;
+			eCount << enemyCount;
+			eCount >> eStr;
+
+			String gameInfo = eStr;
+			gameInfo += "/";
+
 			for (auto it = m_clients.begin(); it != m_clients.end(); it++)
 			{
 				if (it->first != clientID)
 				{
 					if (it->second->ClientConnected())
 					{
-						gameInfo += it->second->GetInfo() + "/";
+						gameInfo += it->second->GetInfo();
+						gameInfo += "/";
 					}
 				}
 			}
 
 			// sends info to current client
 
-			if (gameInfo == "")
+			if (gameInfo == "0/")
 			{
 				gameInfo = "none";
 			}
@@ -163,7 +176,8 @@ void Network::WaitForClients()
 		if (m_clients[m_clientIDCount] != nullptr)
 		{
 			std::cout << "Waiting for client\n";
-			while (m_clients[m_clientIDCount] != nullptr && m_clients[m_clientIDCount]->GetSocket() == nullptr) // wait for new client connection
+
+			while (!m_exit && m_clients[m_clientIDCount] != nullptr && m_clients[m_clientIDCount]->GetSocket() == nullptr) // wait for new client connection or network is not disconnecting
 			{
 				m_clients[m_clientIDCount]->ListenForClient(m_listenSocket);
 			}

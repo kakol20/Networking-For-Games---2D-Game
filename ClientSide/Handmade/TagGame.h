@@ -27,6 +27,10 @@ public:
 	void Draw();
 
 	bool IsDisconnecting();
+	void SetExit(const bool flag);
+
+	void CloseSocket();
+	void Shutdown();
 
 private:
 	bool OpenSocket();
@@ -42,6 +46,8 @@ private:
 	bool m_exit;
 
 	Player m_player;
+	Sprite m_enemy;
+	Text m_enemyTag;
 
 	std::vector<String> m_enemyInfo;
 	std::mutex m_mutex;

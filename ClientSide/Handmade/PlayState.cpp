@@ -41,7 +41,12 @@ bool PlayState::Update()
 	//the M key moves to the main menu
 	if (keys[SDL_SCANCODE_M])
 	{
-		m_image->StopMusic();
+		//m_image->StopMusic();
+
+		m_mainGame.SetExit(true);
+		m_mainGame.CloseSocket();
+		m_mainGame.Shutdown();
+
 		m_isActive = m_isAlive = false;
 		TheGame::Instance()->ChangeState(new MenuState(this));
 	}
@@ -49,7 +54,12 @@ bool PlayState::Update()
 	//the Q key moves to the ending state
 	if (keys[SDL_SCANCODE_Q])
 	{
-		m_image->StopMusic();
+		//m_image->StopMusic();
+		m_mainGame.SetExit(true);
+		m_mainGame.CloseSocket();
+		m_mainGame.Shutdown();
+
+
 		m_isActive = m_isAlive = false;
 		TheGame::Instance()->ChangeState(new EndState(this));
 	}

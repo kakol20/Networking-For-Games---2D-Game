@@ -23,7 +23,7 @@
     <ProjectGuid>{F073EC33-6A97-4DD0-82DE-F4AF63E0FEC7}</ProjectGuid>
     <RootNamespace>Handmade</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>ServerSide</ProjectName>
+    <ProjectName>ClientSide</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
